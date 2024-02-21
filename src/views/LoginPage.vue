@@ -1,12 +1,12 @@
 <template>
-  <div class="auth-page">
+  <div class="login-page">
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign up</h1>
+          <h1 class="text-xs-center">Login</h1>
           <p class="text-xs-center">
-            <router-link :to="{ name: 'login' }">
-              Have an account?
+            <router-link :to="{ name: 'register' }">
+              Need an account?
             </router-link>
           </p>
           <ValidationErrors
@@ -14,14 +14,7 @@
             :validationErrors="validationErrors"
           />
           <form @submit.prevent="onSubmit">
-            <fieldset class="form-group">
-              <input
-                class="form-control form-control-lg"
-                type="text"
-                placeholder="Username"
-                v-model="username"
-              />
-            </fieldset>
+            <fieldset class="form-group"></fieldset>
             <fieldset class="form-group">
               <input
                 class="form-control form-control-lg"
@@ -53,16 +46,13 @@
 
 <script>
 import ValidationErrors from "@/components/ValidationErrors.vue";
-// import { mapGetters } from "vuex";
-
 export default {
   components: {
     ValidationErrors,
   },
-  name: "RegisterPage",
+  name: "LoginPage",
   data() {
     return {
-      username: "",
       email: "",
       password: "",
     };
@@ -81,7 +71,7 @@ export default {
       this.$store
         .dispatch("auth/register", {
           email: this.email,
-          username: this.email,
+
           password: this.password,
         })
         .then((result) => {
