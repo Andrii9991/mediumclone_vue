@@ -1,9 +1,19 @@
 <template>
   <div id="app">
-    <h1>Hello World</h1>
+    <TopBar />
 
     <router-view />
   </div>
 </template>
+
+<script>
+import TopBar from "@/components/TopBar.vue";
+export default {
+  name: "App",
+  components: {
+    TopBar,
+  },
+};
+</script>
 
 <style></style>
