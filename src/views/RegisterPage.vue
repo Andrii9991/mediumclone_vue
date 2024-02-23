@@ -52,8 +52,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import ValidationErrors from "@/components/ValidationErrors.vue";
-// import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -68,12 +68,10 @@ export default {
     };
   },
   computed: {
-    isSubmitting() {
-      return this.$store.state.auth.isSubmitting;
-    },
-    validationErrors() {
-      return this.$store.state.auth.validationErrors;
-    },
+    ...mapState({
+      isSubmitting: (state) => state.auth.isSubmitting,
+      validationErrors: (state) => state.auth.validationErrors,
+    }),
   },
 
   methods: {
@@ -81,7 +79,7 @@ export default {
       this.$store
         .dispatch("auth/register", {
           email: this.email,
-          username: this.email,
+          username: this.username,
           password: this.password,
         })
         .then((result) => {
