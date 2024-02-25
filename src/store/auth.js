@@ -5,9 +5,10 @@ export default {
   namespaced: true,
   state: {
     isSubmitting: false,
+    isLoading: false,
     currentUser: null,
     validationErrors: null,
-    isLoggedIn: false,
+    isLoggedIn: null,
   },
   getters: {
     currentUser: (state) => state.currentUser,
@@ -15,7 +16,7 @@ export default {
       return Boolean(state.isLoggedIn);
     },
     isAnonimus: (state) => {
-      state.isLoggedIn === false;
+      return state.isLoggedIn === false;
     },
   },
 
@@ -47,6 +48,20 @@ export default {
       state.isSubmitting = false;
       state.validationErrors = payload;
     },
+
+    getCurrentUserStart(state) {
+      state.isLoading = true;
+    },
+    getCurrentUserSuccess(state, payload) {
+      state.isLoading = false;
+      state.currentUser = payload;
+      state.isLoggedIn = true;
+    },
+    getCurrentUserFailure(state) {
+      state.isLoading = false;
+      state.isLoggedIn = false;
+      state.currentUser = null;
+    },
   },
   actions: {
     register(context, credentials) {
@@ -77,6 +92,20 @@ export default {
           })
           .catch((result) => {
             context.commit("loginFailure", result.response.data.errors);
+          });
+      });
+    },
+    getCurrentUser(context) {
+      return new Promise((resolve) => {
+        context.commit("getCurrentUserStart");
+        authApi
+          .getCurrentUser()
+          .then((response) => {
+            context.commit("getCurrentUserSuccess", response.data.user);
+            resolve(response.data.user);
+          })
+          .catch(() => {
+            context.commit("getCurrentUserFailure");
           });
       });
     },

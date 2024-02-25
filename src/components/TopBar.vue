@@ -82,8 +82,5 @@ export default {
     ...mapGetters("auth", ["currentUser", "isLoggedIn", "isAnonimus"]),
   },
   method: {},
-  mounted() {
-    console.log(this.isLoggedIn);
-  },
 };
 </script>
