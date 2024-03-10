@@ -9,9 +9,9 @@
               Need an account?
             </router-link>
           </p>
-          <ValidationErrors
-            v-if="validationErrors"
-            :validationErrors="validationErrors"
+          <BaseValidationErrors
+            v-if="BaseValidationErrors"
+            :BaseValidationErrors="BaseValidationErrors"
           />
           <form @submit.prevent="onSubmit">
             <fieldset class="form-group"></fieldset>
@@ -46,10 +46,10 @@
 
 <script>
 import { mapState } from "vuex";
-import ValidationErrors from "@/components/ValidationErrors.vue";
+import BaseValidationErrors from "@/components/BaseValidationErrors.vue";
 export default {
   components: {
-    ValidationErrors,
+    BaseValidationErrors,
   },
   name: "LoginPage",
   data() {
@@ -61,7 +61,7 @@ export default {
   computed: {
     ...mapState({
       isSubmitting: (state) => state.auth.isSubmitting,
-      validationErrors: (state) => state.auth.validationErrors,
+      BaseValidationErrors: (state) => state.auth.BaseValidationErrors,
     }),
   },
 

@@ -7,7 +7,7 @@ export default {
     isSubmitting: false,
     isLoading: false,
     currentUser: null,
-    validationErrors: null,
+    BaseValidationErrors: null,
     isLoggedIn: null,
   },
   getters: {
@@ -23,7 +23,7 @@ export default {
   mutations: {
     registerStart(state) {
       state.isSubmitting = true;
-      state.validationErrors = null;
+      state.BaseValidationErrors = null;
     },
     registerSuccess(state, payload) {
       state.isSubmitting = false;
@@ -32,12 +32,12 @@ export default {
     },
     registerFailure(state, payload) {
       state.isSubmitting = false;
-      state.validationErrors = payload;
+      state.BaseValidationErrors = payload;
     },
 
     loginStart(state) {
       state.isSubmitting = true;
-      state.validationErrors = null;
+      state.BaseValidationErrors = null;
     },
     loginSuccess(state, payload) {
       state.isSubmitting = false;
@@ -46,7 +46,7 @@ export default {
     },
     loginFailure(state, payload) {
       state.isSubmitting = false;
-      state.validationErrors = payload;
+      state.BaseValidationErrors = payload;
     },
 
     getCurrentUserStart(state) {

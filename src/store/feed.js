@@ -32,7 +32,6 @@ export default {
             resolve(response.data);
           })
           .catch(() => {
-            console.log("ss");
             context.commit("getFeedFailure");
           });
       });

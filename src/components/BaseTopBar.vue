@@ -76,7 +76,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "TopBar",
+  name: "BaseTopBar",
   props: {},
   computed: {
     ...mapGetters("auth", ["currentUser", "isLoggedIn", "isAnonimus"]),
