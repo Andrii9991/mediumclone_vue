@@ -7,17 +7,17 @@
 </template>
 <script>
 export default {
-  name: "ValidationErrors",
+  name: "BaseValidationErrors",
   props: {
-    validationErrors: {
+    BaseValidationErrors: {
       type: Object,
       required: true,
     },
   },
   computed: {
     errorMessages() {
-      return Object.keys(this.validationErrors).map((name) => {
-        const messages = this.validationErrors[name].join(",");
+      return Object.keys(this.BaseValidationErrors).map((name) => {
+        const messages = this.BaseValidationErrors[name].join(",");
         return `${messages}`;
       });
     },

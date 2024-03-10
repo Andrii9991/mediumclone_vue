@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <TopBar />
+    <BaseTopBar />
 
     <router-view />
   </div>
 </template>
 
 <script>
-import TopBar from "@/components/TopBar.vue";
+import BaseTopBar from "@/components/BaseTopBar.vue";
 
 export default {
   name: "App",
   components: {
-    TopBar,
+    BaseTopBar,
   },
 
   mounted() {

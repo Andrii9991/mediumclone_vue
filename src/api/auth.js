@@ -11,6 +11,7 @@ const login = (credentials) => {
 const getCurrentUser = () => {
   return axios.get("/user");
 };
+
 export default {
   register,
   login,
