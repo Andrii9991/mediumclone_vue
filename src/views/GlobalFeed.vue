@@ -4,9 +4,11 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-9">
-          <BaseFeed :apiUrl="apiUrl" />
+          <BaseFeed :api-url="apiUrl"></BaseFeed>
         </div>
-        <div class="col-md-3">POPULAR TAGS</div>
+        <div class="col-md-3">
+          <BasePopularTag></BasePopularTag>
+        </div>
       </div>
     </div>
   </div>
@@ -14,10 +16,13 @@
 
 <script>
 import BaseFeed from "@/components/BaseFeed.vue";
+import BasePopularTag from "@/components/BasePopularTag.vue";
+
 export default {
   name: "GlobalFeed",
   components: {
     BaseFeed,
+    BasePopularTag,
   },
   data() {
     return {
