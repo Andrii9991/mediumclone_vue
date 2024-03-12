@@ -10,8 +10,8 @@
               params: { slug: article.author.username },
             }"
           >
-            <img :src="article.author.image" alt="avatar"
-          /></router-link>
+            <img :src="article.author.image" />
+          </router-link>
           <div class="info">
             <router-link
               :to="{
@@ -31,7 +31,10 @@
               <i class="ion-edit"></i>
               Edit Article
             </router-link>
-            <button class="btn btn-outline-danger btn-sm">
+            <button
+              class="btn btn-outline-danger btn-sm"
+              @click="deleteArticle"
+            >
               <i class="ion-trash-a"></i>
               Delete Article
             </button>
@@ -40,14 +43,14 @@
       </div>
     </div>
     <div class="container page">
-      <BaseLoading v-if="isLoading"></BaseLoading>
-      <BaseError v-if="error" :message="error"></BaseError>
+      <BaseLoading v-if="isLoading" />
+      <BaseError v-if="isLoading" :message="error" />
       <div class="row article-content" v-if="article">
         <div class="col-xs-12">
           <div>
             <p>{{ article.body }}</p>
           </div>
-          TAGLIST
+          <BaseTagList :article="article"></BaseTagList>
         </div>
       </div>
     </div>
@@ -58,12 +61,14 @@
 import { mapState, mapGetters } from "vuex";
 import BaseLoading from "@/components/BaseLoading.vue";
 import BaseError from "@/components/BaseError.vue";
+import BaseTagList from "@/components/BaseTagList.vue";
 
 export default {
   name: "TheArticle",
   components: {
     BaseLoading,
     BaseError,
+    BaseTagList,
   },
   props: {},
   computed: {
@@ -80,12 +85,22 @@ export default {
       return this.currentUser.username === this.article.author.username;
     },
   },
+
+  methods: {
+    deleteArticle() {
+      this.$store
+        .dispatch("article/deleteArticle", {
+          slug: this.$route.params.slug,
+        })
+        .then(() => {
+          this.$route.push({ name: "globalFeed" });
+        });
+    },
+  },
   mounted() {
     this.$store.dispatch("article/getArticle", {
       slug: this.$route.params.slug,
     });
-
-    console.log(this.isAuthor);
   },
 };
 </script>

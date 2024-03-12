@@ -20,11 +20,15 @@ export default {
     getArticleFailure(state) {
       state.isLoading = false;
     },
+
+    deleteArticleStart() {},
+    deleteArticleSuccess() {},
+    deleteArticleFailure() {},
   },
   actions: {
     getArticle(context, { slug }) {
       return new Promise((resolve) => {
-        context.commit("getArticleStart", slug);
+        context.commit("getArticleStart");
         articleApi
           .getArticle(slug)
           .then((article) => {
@@ -33,6 +37,20 @@ export default {
           })
           .catch(() => {
             context.commit("getArticleFailure");
+          });
+      });
+    },
+    deleteArticle(context, { slug }) {
+      return new Promise((resolve) => {
+        context.commit("deleteArticleStart", slug);
+        articleApi
+          .deleteArticle(slug)
+          .then((article) => {
+            context.commit("deleteArticleSuccess", article);
+            resolve(article);
+          })
+          .catch(() => {
+            context.commit("deleteArticleFailure");
           });
       });
     },
