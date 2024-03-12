@@ -4,7 +4,7 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-9">
-          <BaseFeedToggler></BaseFeedToggler>
+          <BaseFeedToggler :tag-name="tagName"></BaseFeedToggler>
           <BaseFeed :api-url="apiUrl"></BaseFeed>
         </div>
         <div class="col-md-3">
@@ -22,17 +22,21 @@ import BaseBanner from "@/components/BaseBanner.vue";
 import BaseFeedToggler from "@/components/BaseFeedToggler.vue";
 
 export default {
-  name: "GlobalFeed",
+  name: "TagFeed",
   components: {
     BaseFeed,
     BasePopularTag,
     BaseBanner,
     BaseFeedToggler,
   },
-  data() {
-    return {
-      apiUrl: "/articles",
-    };
+
+  computed: {
+    tagName() {
+      return this.$route.params.slug;
+    },
+    apiUrl() {
+      return `/articles?tag=${this.tagName}`;
+    },
   },
 };
 </script>

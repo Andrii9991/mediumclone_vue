@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="isLoading">Loading...</div>
-    <div v-if="error">Something bad happed</div>
+    <BaseLoading v-if="isLoading"></BaseLoading>
+    <BaseError v-if="error"></BaseError>
     <div v-if="feed">
       <div
         class="article-preview"
@@ -52,6 +52,8 @@
 
 <script>
 import BasePagination from "@/components/BasePagination";
+import BaseLoading from "./BaseLoading.vue";
+import BaseError from "./BaseError.vue";
 import { mapState } from "vuex";
 import { limit } from "@/helper/vars";
 import { parseUrl, stringify } from "query-string";
@@ -60,6 +62,8 @@ export default {
   name: "BaseFeed",
   components: {
     BasePagination,
+    BaseLoading,
+    BaseError,
   },
   props: {
     apiUrl: {
@@ -104,6 +108,9 @@ export default {
 
   watch: {
     currentPage() {
+      this.fetchFeed();
+    },
+    apiUrl() {
       this.fetchFeed();
     },
   },

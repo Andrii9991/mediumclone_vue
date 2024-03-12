@@ -22,7 +22,7 @@ import BaseBanner from "@/components/BaseBanner.vue";
 import BaseFeedToggler from "@/components/BaseFeedToggler.vue";
 
 export default {
-  name: "GlobalFeed",
+  name: "YourFeed",
   components: {
     BaseFeed,
     BasePopularTag,
@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      apiUrl: "/articles",
+      apiUrl: "/articles/feed",
     };
   },
 };

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-if="isLoading">Loading...</div>
-    <div v-if="error">Something is broken</div>
+    <BaseLoading v-if="isLoading"></BaseLoading>
+    <BaseError v-if="error"></BaseError>
 
-    <div class="sidebar">
+    <div class="sidebar" v-if="popularTags">
       <p>Popular Tags</p>
       <div class="tag-list">
         <router-link
@@ -21,9 +21,15 @@
 
 <script>
 import { mapState } from "vuex";
+import BaseLoading from "./BaseLoading.vue";
+import BaseError from "./BaseError.vue";
 
 export default {
   name: "BasePopularTag",
+  components: {
+    BaseLoading,
+    BaseError,
+  },
   computed: {
     ...mapState({
       isLoading: (state) => state.popularTags.isLoading,
@@ -31,6 +37,7 @@ export default {
       error: (state) => state.popularTags.error,
     }),
   },
+
   mounted() {
     this.$store.dispatch("popularTags/getPopularTags");
   },
