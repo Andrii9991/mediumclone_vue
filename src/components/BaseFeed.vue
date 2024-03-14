@@ -38,7 +38,7 @@
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span>Read more...</span>
-          TAG LIST
+          <BaseTagList :article="article"></BaseTagList>
         </router-link>
       </div>
       <BasePagination
@@ -54,11 +54,11 @@
 <script>
 import { mapState } from "vuex";
 import { stringify, parseUrl } from "query-string";
-
-import BasePagination from "@/components/BasePagination";
 import { limit } from "@/helper/vars";
+import BasePagination from "@/components/BasePagination";
 import BaseLoading from "@/components/BaseLoading";
 import BaseError from "@/components/BaseError";
+import BaseTagList from "@/components/BaseTagList";
 
 export default {
   name: "BaseFeed",
@@ -66,6 +66,7 @@ export default {
     BasePagination,
     BaseLoading,
     BaseError,
+    BaseTagList,
   },
   props: {
     apiUrl: {
@@ -94,6 +95,9 @@ export default {
   },
   watch: {
     currentPage() {
+      this.fetchFeed();
+    },
+    apiUrl() {
       this.fetchFeed();
     },
   },
