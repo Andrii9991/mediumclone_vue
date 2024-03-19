@@ -62,6 +62,11 @@ export default {
       state.isLoggedIn = false;
       state.currentUser = null;
     },
+    updateCurrentUserStart() {},
+    updateCurrentUserSuccess(state, payload) {
+      state.currentUser = payload;
+    },
+    updateCurrentUserFailure() {},
   },
   actions: {
     register(context, credentials) {
@@ -106,6 +111,23 @@ export default {
           })
           .catch(() => {
             context.commit("getCurrentUserFailure");
+          });
+      });
+    },
+    updateCurrentUser(context, { currentUserInput }) {
+      return new Promise((resolve) => {
+        context.commit("updateCurrentUserStart");
+        authApi
+          .updateCurrentUser(currentUserInput)
+          .then((user) => {
+            context.commit("updateCurrentUserSuccess", user);
+            resolve(user);
+          })
+          .catch((result) => {
+            context.commit(
+              "updateCurrentUserFailure",
+              result.response.data.errors
+            );
           });
       });
     },

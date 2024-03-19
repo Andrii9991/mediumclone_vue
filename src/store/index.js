@@ -5,6 +5,8 @@ import popularTags from "./popularTags";
 import feed from "@/store/feed";
 import article from "@/store/article";
 import createArticle from "@/store/createArticle";
+import settings from "@/store/settings";
+import addToFavorite from "@/store/addToFavorite";
 
 Vue.use(Vuex);
 
@@ -19,5 +21,7 @@ export default new Vuex.Store({
     popularTags,
     article,
     createArticle,
+    settings,
+    addToFavorite,
   },
 });
