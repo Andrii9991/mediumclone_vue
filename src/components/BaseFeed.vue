@@ -29,7 +29,13 @@
             </router-link>
             <span class="date">{{ article.createdAt }}</span>
           </div>
-          <div class="pull-xs-right">ADD TO FAVORITES</div>
+          <div class="pull-xs-right">
+            <BaseAddToFavorite
+              :isFavorited="article.favorited"
+              :articleSlug="article.slug"
+              :favoritesCount="article.favoritesCount"
+            ></BaseAddToFavorite>
+          </div>
         </div>
         <router-link
           :to="{ name: 'article', params: { slug: article.slug } }"
@@ -59,6 +65,7 @@ import BasePagination from "@/components/BasePagination";
 import BaseLoading from "@/components/BaseLoading";
 import BaseError from "@/components/BaseError";
 import BaseTagList from "@/components/BaseTagList";
+import BaseAddToFavorite from "@/components/BaseAddToFavorite";
 
 export default {
   name: "BaseFeed",
@@ -67,6 +74,7 @@ export default {
     BaseLoading,
     BaseError,
     BaseTagList,
+    BaseAddToFavorite,
   },
   props: {
     apiUrl: {
