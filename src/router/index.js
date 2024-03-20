@@ -7,6 +7,7 @@ import RegisterPage from "../views/RegisterPage.vue";
 import LoginPage from "../views/LoginPage.vue";
 import TheArticle from "@/views/TheArticle.vue";
 import CreateArticle from "@/views/CreateArticle.vue";
+import UserProfile from "@/views/UserProfile.vue";
 
 Vue.use(VueRouter);
 
@@ -54,12 +55,12 @@ const routes = [
   {
     path: "/profiles/:slug",
     name: "userProfile",
-    component: GlobalFeed,
+    component: UserProfile,
   },
   {
     path: "/profiles/:slug/favorites",
     name: "userProfileFavorites",
-    component: GlobalFeed,
+    component: UserProfile,
   },
   {
     path: "/",
